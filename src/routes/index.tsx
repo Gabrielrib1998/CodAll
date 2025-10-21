@@ -4,7 +4,7 @@ import Login from '../pages/login';
 import Cadastro from '../pages/Cadastro/Index';
 import Home from '../pages/Home/Index';
 import Perfil from '../pages/Perfil/Index';
-import ConfigurarServidor from '../pages/ConfigurarServidor/Index';
+// import ConfigurarServidor from '../pages/ConfigurarServidor/Index';
 import { AuthContext } from '../global/AuthContext';
 import Cabecalho from '../components/Cabecalho';
 
@@ -46,11 +46,11 @@ export default function Routes() {
           component={Perfil} 
             options={{ headerShown: true, header: () => <Cabecalho /> }} 
         />
-        <Stack.Screen 
+        {/* <Stack.Screen 
           name="ConfigurarServidor" 
           component={ConfigurarServidor} 
           options={{ title: 'Configurar Servidor', headerShown: true }} 
-        />
+        /> */}
       
     </Stack.Navigator>
   );
