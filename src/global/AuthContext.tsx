@@ -61,7 +61,7 @@ export function ProvedorAuth({ children }: ProvedorAuthProps) {
   const entrar = useCallback(async (email: string, senha: string) => {
     setCarregando(true);
     try {
-      const resp = await api.post('/login', { email, senha });
+      const resp = await api.post('/usuarios/login', { email, senha });
       const data = resp.data;
       console.log('[AuthContext] login response:', data);
 
