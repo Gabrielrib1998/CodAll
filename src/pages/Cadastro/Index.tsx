@@ -20,7 +20,7 @@ export default function Cadastro() {
   const [complement, setComplement] = React.useState('');
   const [district, setDistrict] = React.useState('');
   const [city, setCity] = React.useState('');
-  const [role, setRole] = React.useState<'aluno' | 'professor'>('aluno');
+  const [role, setRole] = React.useState<'aluno' | 'supervisor'>('aluno');
   const [matricula, setMatricula] = React.useState('');
   const [loading, setLoading] = React.useState(false);
   const emailRef = useRef<TextInput>(null);
@@ -73,7 +73,7 @@ export default function Cadastro() {
       !number.trim() ||
       !district.trim() ||
       !city.trim() ||
-      (role === 'professor' && !matricula.trim())
+  (role === 'supervisor' && !matricula.trim())
     ) {
       Alert.alert('Atenção', 'Preencha todos os campos!');
       return;
@@ -101,9 +101,9 @@ export default function Cadastro() {
         complemento: complement,
         bairro:district,
         cidade: city,
-        tipo_usuario: role === 'professor' ? 'professor' : 'aluno',
+  tipo_usuario: role === 'supervisor' ? 'supervisor' : 'aluno',
       };
-      if (role === 'professor') payload.matricula = matricula;
+  if (role === 'supervisor') payload.matricula = matricula;
 
       await api.post('/usuarios', payload);
       
@@ -181,10 +181,10 @@ export default function Cadastro() {
                       <Text style={[styles.roleButtonText, role === 'aluno' ? styles.roleButtonTextActive : null]}>Aluno</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                      style={[styles.roleButton, role === 'professor' ? styles.roleButtonActive : null]}
-                      onPress={() => setRole('professor')}
-                    >
-                      <Text style={[styles.roleButtonText, role === 'professor' ? styles.roleButtonTextActive : null]}>Professor</Text>
+                      style={[styles.roleButton, role === 'supervisor' ? styles.roleButtonActive : null]}
+                        onPress={() => setRole('supervisor')}
+                      >
+                        <Text style={[styles.roleButtonText, role === 'supervisor' ? styles.roleButtonTextActive : null]}>Supervisor</Text>
                     </TouchableOpacity>
                   </View>
                 </View>
@@ -227,7 +227,7 @@ export default function Cadastro() {
                   onSubmitEditing={() => phoneRef.current?.focus()}
                   ref={nameRef}
                 />
-                {role === 'professor' && (
+                {role === 'supervisor' && (
                   <Input
                     value={matricula}
                     onChangeText={setMatricula}
