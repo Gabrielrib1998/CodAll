@@ -101,7 +101,7 @@ export default function Cadastro() {
         complemento: complement,
         bairro:district,
         cidade: city,
-        tipo: role === 'professor' ? 'professor' : 'aluno',
+        tipo_usuario: role === 'professor' ? 'professor' : 'aluno',
       };
       if (role === 'professor') payload.matricula = matricula;
 
@@ -129,8 +129,8 @@ export default function Cadastro() {
       setComplement('');
       setDistrict('');
       setCity('');
-    setRole('aluno');
-    setMatricula('');
+      setRole('aluno');
+      setMatricula('');
   Keyboard.dismiss();
     } catch (e: any) {
       setLoading(false);
