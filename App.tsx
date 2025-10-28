@@ -5,16 +5,25 @@ import Routes from './src/routes';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ProvedorAuth } from './src/global/AuthContext';
 import { ActivityIndicator, View } from 'react-native';
+import api from './src/services/api';
 
 export default function App() {
   const [carregando, setCarregando] = useState(true);
+  const [usuarios, setUsuarios] = useState([]);
 
   useEffect(() => {
-    // Simula carregamento inicial, por exemplo sessão do AuthContext
-    const carregarInicial = async () => {
-      setCarregando(false);
+    const carregarDados = async () => {
+      try {
+        const response = await api.get('/usuarios');
+        console.log('Usuários:', response.data);
+        setUsuarios(response.data);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setCarregando(false);
+      }
     };
-    carregarInicial();
+    carregarDados();
   }, []);
 
   if (carregando) {
@@ -35,3 +44,4 @@ export default function App() {
     </SafeAreaProvider>
   );
 }
+
