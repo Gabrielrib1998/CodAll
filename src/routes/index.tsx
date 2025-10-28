@@ -3,8 +3,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Login from '../pages/login';
 import Cadastro from '../pages/Cadastro/Index';
 import Home from '../pages/Home/Index';
-import Perfil from '../pages/Perfil/Index';
-import ConfigurarServidor from '../pages/ConfigurarServidor/Index';
+// import Perfil from '../pages/Perfil/Index';
+// import ConfigurarServidor from '../pages/ConfigurarServidor/Index';
 import { AuthContext } from '../global/AuthContext';
 import Cabecalho from '../components/Cabecalho';
 import CursoHtml from '../pages/CursoHtml/modulo1/index';
@@ -49,16 +49,11 @@ export default function Routes() {
         component={Home} 
           options={{ headerShown: true, header: () => <Cabecalho /> }} 
       />
-        <Stack.Screen 
+        {/* <Stack.Screen 
           name="Perfil" 
           component={Perfil} 
             options={{ headerShown: true, header: () => <Cabecalho /> }} 
-        />
-        <Stack.Screen 
-          name="ConfigurarServidor" 
-          component={ConfigurarServidor} 
-          options={{ headerShown: true, header: () => <Cabecalho /> }} 
-        />
+        /> */}
         <Stack.Screen 
           name="CursoHtml" 
           component={CursoHtml} 

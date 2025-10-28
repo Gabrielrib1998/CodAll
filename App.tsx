@@ -1,22 +1,29 @@
 import 'react-native-gesture-handler';
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import Routes from './src/routes/index';
+import Routes from './src/routes';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ProvedorAuth } from './src/global/AuthContext';
-import { inicializarApiBase } from './src/services/api';
+import { ActivityIndicator, View } from 'react-native';
 
 export default function App() {
-  const [pronto, setPronto] = useState(false);
+  const [carregando, setCarregando] = useState(true);
 
   useEffect(() => {
-    (async () => {
-      await inicializarApiBase();
-      setPronto(true);
-    })();
+    // Simula carregamento inicial, por exemplo sessão do AuthContext
+    const carregarInicial = async () => {
+      setCarregando(false);
+    };
+    carregarInicial();
   }, []);
 
-  if (!pronto) return null;
+  if (carregando) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>
+    );
+  }
 
   return (
     <SafeAreaProvider>

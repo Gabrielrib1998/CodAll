@@ -3,7 +3,7 @@ import { Text, Image, TextInput, TouchableOpacity, View, ActivityIndicator, Keyb
 import { styles } from "./styles";
 import Logo from "../../Assets/logo.png";
 import { Input } from "../../components/input";
-import { apiRegister } from "../../services/api";
+import api from "../../services/api";
 import { useNavigation } from "@react-navigation/native";
 export default function Cadastro() {
   const navigation = useNavigation();
@@ -59,10 +59,10 @@ export default function Cadastro() {
 
   async function getLogin() {
    if (
-      !email.trim()&& !email.includes('@') ||
+      !email.trim() ||
       !password.trim() ||
       !confirmPassword.trim() ||
-      !name.trim() && name.length < 3 ||
+      !name.trim() ||
       !phone.trim() ||
       !cpf.trim() ||
       !cep.trim() ||
@@ -85,24 +85,25 @@ export default function Cadastro() {
       const cpfRaw = somenteDigitos(cpf);
       const cepRaw = somenteDigitos(cep);
       const phoneRaw = somenteDigitos(phone);
-      await apiRegister({
-        name,
-        email,
-        password,
-        phone: phoneRaw,
+      await api.post('/usuarios',{
+        nome:name,
+        email:email,
+        senha:password,
+        telefone: phoneRaw,
         cpf: cpfRaw,
         cep: cepRaw,
-        address,
-        number,
-        complement,
-        district,
-        city,
+        endereco:address,
+        numero:number,
+        complemento: complement,
+        bairro:district,
+        cidade: city,
       });
       setLoading(false);
       Alert.alert('Sucesso', 'Usuário cadastrado com sucesso!', [
         {
           text: 'Ir para Login',
           onPress: () => {
+            // Redireciona para a tela de Login e limpa o histórico
             (navigation as any).reset?.({ index: 0, routes: [{ name: 'Login' }] });
           },
         },
@@ -122,8 +123,18 @@ export default function Cadastro() {
   Keyboard.dismiss();
     } catch (e: any) {
       setLoading(false);
-      Alert.alert('Erro', e?.message || 'Falha ao cadastrar');
-    }
+      const erroJSON = e.response?.data; // JSON enviado pelo Flask
+      const status = e.response?.status; // status HTTP
+
+      if (erroJSON?.erro) {
+        Alert.alert('Erro', erroJSON.erro); // mostra mensagem do backend
+      } else {
+        Alert.alert('Erro', 'Falha ao conectar com o servidor');
+      }
+
+      console.log('Status:', status);
+      console.log('Erro do backend:', erroJSON);
+      }
   }
  
   return (
