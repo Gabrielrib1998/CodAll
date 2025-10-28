@@ -79,4 +79,48 @@ container: {
     opacity: 0.6, 
     zIndex: -1, 
   },
+  pickerLabel: {
+    fontSize: 14,
+    color: theme.colors.black,
+    fontWeight: '600',
+    marginBottom: 6,
+    alignSelf: 'flex-start',
+  },
+  pickerContainer: {
+    width: '100%',
+    borderWidth: 1,
+    borderColor: '#ddd',
+    borderRadius: 8,
+    overflow: 'hidden',
+    marginBottom: 12,
+  },
+  roleRow: {
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 8,
+  },
+  roleToggle: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  roleButton: {
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    borderRadius: 20,
+    backgroundColor: '#f0f0f0',
+  },
+  roleButtonActive: {
+    backgroundColor: theme.colors.botao,
+  },
+  roleButtonText: {
+    fontSize: 13,
+    color: theme.colors.black,
+    fontWeight: '600',
+  },
+  roleButtonTextActive: {
+    color: '#fff',
+  },
   });
